@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registrations</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #ff6b6b;
+            --accent-color: #feca57;
+            --dark-color: #2c3e50;
+            --light-color: #f5f6fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            animation: gradientBG 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #fff, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .registrations-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.6s ease-out;
+            margin-bottom: 40px;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .registrations-table th {
+            background: linear-gradient(135deg, var(--primary-color), #6a5acd);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .registrations-table th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        .registrations-table th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        .registrations-table tr {
+            transition: all 0.3s ease;
+        }
+
+        .registrations-table tr:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .registrations-table tr:hover {
+            background: rgba(74, 107, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .registrations-table td {
+            padding: 15px 18px;
+            color: var(--dark-color);
+            font-weight: 400;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(74, 107, 255, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-update {
+            background: linear-gradient(135deg, #2ecc71, #1abc9c);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-update:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .event-icon {
+            height: 120px;
+            width: 120px;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .registrations-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .registrations-table th,
+            .registrations-table td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+                min-width: 150px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    {{#if status}}
+        <script>
+            const status = {{status}};
+            if (status == 1) {
+                alert("Data Updated Successfully!");
+            } else if (status == 2) {
+                alert("Data Deleted Successfully!");
+            }
+        </script>
+    {{/if}}
+
+    <div class="header">
+        <h1>REGISTRATION LIST FOR UPCOMING SIGNIFIA EVENT</h1>
+    </div>
+
+    {{#if data.length}}
+        <table class="registrations-table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Event</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each data}}
+                <form method="post" action="/update">
+                    <tr>
+                        <td>
+                            <input type="hidden" name="id" value="{{this._id}}">
+                            <input class="input-field" type="text" name="name" value="{{this.name}}" required>
+                        </td>
+                        <td>
+                            <input class="input-field" type="email" name="email" value="{{this.email}}" required>
+                        </td>
+                        <td>
+                            <input class="input-field" type="tel" name="phone" value="{{this.phone}}" required>
+                        </td>
+                        <td>
+                            <input class="input-field" type="text" name="event" value="{{this.event}}" required>
+                        </td>
+                        <td>
+                            <button class="btn btn-update" name="btn" type="submit" value="UPDATE">Update</button>
+                            <button class="btn btn-delete" name="btn" type="submit" value="DELETE">Delete</button>
+                        </td>
+                    </tr>
+                </form>
+            {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <div class="empty-state">
+            <p>No registrations found. Be the first to register!</p>
+        </div>
+    {{/if}}
+
+    <div class="footer">
+        <img src="https://cdn-icons-png.flaticon.com/512/9070/9070365.png" alt="Event Icon" class="event-icon" />
+    </div>
+</div>
+</body>
+</html>

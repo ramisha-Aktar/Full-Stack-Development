@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signifia - TechFest</title>
+  <link rel="stylesheet" href="../../public/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0f0f0f;
+            color: #fff;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 40px;
+            background-color: rgba(21, 5, 102, 0.76);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #efeaea;
+            letter-spacing: 1px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e1e2f, #3f51b5);
+            animation: slideFade 2s ease-in-out;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .events {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .events ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .events li {
+            padding: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .events li:hover {
+            transform: scale(1.1);
+            color: #00ffcc;
+        }
+
+        .register {
+            padding: 40px;
+            background-color: #222;
+            text-align: center;
+        }
+
+        .register form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input, select, button {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: #3f51b5;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background: #5a68d1;
+        }
+
+        @keyframes slideFade {
+            0% {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .events li {
+            padding: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .events li img {
+            width: 200px;
+            height: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+<header style="display: flex; align-items: center; gap: 15px; padding: 20px;">
+    <img src="https://signifiya.tech/img.png" alt="Signifiya Logo" style="border-radius: 50%;" />
+    <h1 style="margin: 0; font-size: 2rem;">SIGNIFIYA 2025</h1>
+</header>
+
+<section class="events">
+    <h2>Events</h2>
+    <ul>
+      <li>BGMI
+          <img src="https://signifiya.tech/Event/1.png" alt="BGMI Event" />
+      </li>
+      <li>Valorant
+          <img src="https://signifiya.tech/Event/2.png" alt="BGMI Event" />
+      </li>
+      <li>Efootball
+          <img src="https://signifiya.tech/Event/3.png" alt="BGMI Event" />
+      </li>
+      <li>Tug of War
+          <img src="https://signifiya.tech/Event/13.png" alt="BGMI Event" />
+      </li>
+      <li>Coding Contest
+          <img src="https://signifiya.tech/Event/6.png" alt="BGMI Event" />
+      </li>
+      <li>Path Follower
+          <img src="https://signifiya.tech/Event/4.png" alt="BGMI Event" />
+      </li>
+      <li>Circuitronics
+          <img src="https://signifiya.tech/Event/15.png" alt="BGMI Event" />
+      </li>
+      <li>Coding Treasure Hunt
+          <img src="https://signifiya.tech/Event/14.png" alt="BGMI Event" />
+      </li>
+    </ul>
+  </section>
+
+  <section class="register">
+    <h2>Register Now</h2>
+    <form action="/send" method="POST" id="registrationForm">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="tel" name="phone" placeholder="Phone" required />
+      <select name="event">
+        <option value="BGMI">BGMI</option>
+        <option value="Valorant">Valorant</option>
+        <option value="Efootball">Efootball</option>
+        <option value="Tug of War">Tug of War</option>
+        <option value="Coding Contest">Coding Contest</option>
+        <option value="Robotics">Robotics</option>
+        <option value="Circuitronics">Circuitronics</option>
+        <option value="Coding Treasure Hunt">Coding Treasure Hunt</option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+  </section>
+  <button>
+    <a href="/display">Data List</a>
+  </button>
+  <script src="../../src/app.js"></script>
+</body>
+</html>
